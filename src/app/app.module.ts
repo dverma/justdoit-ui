@@ -7,6 +7,9 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { LogoutComponent } from './logout/logout.component';
+import { ErrorComponent } from './error/error.component';
+import { TaskComponent } from './task/task.component';
+import { ListTasksComponent } from './list-tasks/list-tasks.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { LogoutComponent } from './logout/logout.component';
     FooterComponent,
     LoginComponent,
     MenuComponent,
-    LogoutComponent
+    LogoutComponent,
+    ErrorComponent,
+    TaskComponent,
+    ListTasksComponent
   ],
   imports: [
     BrowserModule,
