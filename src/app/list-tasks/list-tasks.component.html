@@ -1,3 +1,50 @@
-<p>
-  list-tasks works!
-</p>
+<!-- <ul ng-repeat="task in tasks" class="list-group-item list-group-item-action">
+  <li class="list_style">
+    <span>{{task.description}}</span>
+    <span><button class="btn btn-danger" ng-click="remove(task._id)">Delete</button></span>
+    <span><button class="btn btn-info" ng-click="edit(task._id)">Edit</button></span>
+    <span><button class="btn btn-info" ng-click="addTask(task._id)">Add new task</button></span>
+    <span><button class="btn btn-success" ng-click="showTasks(task._id)">+</button></span>
+  </li>
+  <li>
+    <ul class="list-group-item list-group-item-action active" style="margin-top: 10px;">
+      <li ng-repeat="subTask in task.subTasks">
+        {{subTask.description}}
+        {{subTask.due_date}}
+      </li>
+    </ul>
+  </li>
+</ul> -->
+
+<h1> Todo </h1>
+
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Target Date</th>
+        <th>is Completed?</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todos">
+        <td>{{todo.description}}</td>
+        <td>{{todo.targetDate | date | uppercase}}</td>
+        <td>{{todo.isCompleted}}</td>
+        <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
+        <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <div class="row">
+    <button (click)="addTodo()" class="btn btn-success">Add</button>
+  </div>
+
+</div>

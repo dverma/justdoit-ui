@@ -10,7 +10,7 @@ import { RouteGuardService } from './service/route-guard.service';
 const routes: Routes = [
   { path: '', component: LoginComponent  },
   { path: 'login', component: LoginComponent },
-  { path: 'todos', component: ListTasksComponent, canActivate:[RouteGuardService] },
+  { path: 'tasks', component: ListTasksComponent, canActivate:[RouteGuardService] },
   { path: 'logout', component: LogoutComponent, canActivate:[RouteGuardService] },
   { path: 'todos/:id', component: TaskComponent, canActivate:[RouteGuardService] },
 
