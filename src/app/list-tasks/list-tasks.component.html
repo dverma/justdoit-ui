@@ -16,7 +16,7 @@
   </li>
 </ul> -->
 
-<h1> Todo </h1>
+<h1> Task </h1>
 
 <div class="alert alert-success" *ngIf='message'>{{message}}</div>
 
@@ -32,19 +32,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let todo of todos">
-        <td>{{todo.description}}</td>
-        <td>{{todo.targetDate | date | uppercase}}</td>
-        <td>{{todo.isCompleted}}</td>
-        <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
-        <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
+      <tr *ngFor="let Task of tasks">
+        <td>{{Task.description}}</td>
+        <td>{{Task.dueDate | date | uppercase}}</td>
+        <td>{{Task.isCompleted}}</td>
+        <td><button (click)="updateTask(Task.id)" class="btn btn-success">Update</button></td>
+        <td><button (click)="deleteTask(Task.id)" class="btn btn-warning">Delete</button></td>
       </tr>
     </tbody>
 
   </table>
 
   <div class="row">
-    <button (click)="addTodo()" class="btn btn-success">Add</button>
+    <button (click)="addTask()" class="btn btn-success">Add</button>
   </div>
 
 </div>

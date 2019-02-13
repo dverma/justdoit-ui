@@ -11,7 +11,7 @@ import { Task } from '../task/task.component';
 export class ListTasksComponent implements OnInit {
 
   user = sessionStorage.getItem('authenticaterUser');
-  tasks = Task[];
+  tasks: Task[];
   message: string;
   constructor(
     private taskService: TaskDataService,
@@ -19,10 +19,10 @@ export class ListTasksComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.refreshtasks();
+    this.refreshTasks();
   }
 
-  refreshtasks() {
+  refreshTasks() {
     this.taskService.retrieveAllTasks(this.user).subscribe(
       response => {
         console.log(response);
@@ -31,23 +31,23 @@ export class ListTasksComponent implements OnInit {
     )
   }
 
-  deletetask(id) {
+  deleteTask(id) {
     console.log(`delete task ${id}`)
     this.taskService.deleteTask(this.user, id).subscribe(
       response => {
         console.log(response);
         this.message = `Delete of task ${id} Successful!`;
-        this.refreshtasks();
+        this.refreshTasks();
       }
     )
   }
 
-  updatetask(id) {
+  updateTask(id) {
     console.log(`update ${id}`)
     this.router.navigate(['tasks', id])
   }
 
-  addtask() {
+  addTask() {
     this.router.navigate(['tasks', -1])
   }
 

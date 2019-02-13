@@ -13,26 +13,26 @@ export class TaskDataService {
   ) { }
 
   retrieveAllTasks(username: string) {
-    return this.http.get<Task[]>(`${environment.API_URL}/users/${username}/taskTasks`);
+    return this.http.get<Task[]>(`${environment.API_URL}/users/${username}/tasks`);
   }
 
   deleteTask(username: string, id: number) {
-    return this.http.delete(`${environment.API_URL}/users/${username}/taskTasks/${id}`);
+    return this.http.delete(`${environment.API_URL}/users/${username}/tasks/${id}`);
   }
 
   retrieveTask(username: string, id: number) {
-    return this.http.get<Task>(`${environment.API_URL}/users/${username}/taskTasks/${id}`);
+    return this.http.get<Task>(`${environment.API_URL}/users/${username}/tasks/${id}`);
   }
 
   updateTask(username: string, id: number, task: Task) {
     return this.http.put(
-      `${environment.API_URL}/users/${username}/taskTasks/${id}`
+      `${environment.API_URL}/users/${username}/tasks/${id}`
       , task);
   }
 
   createTask(username: string, task: Task) {
     return this.http.post(
-      `${environment.API_URL}/users/${username}/taskTasks`
+      `${environment.API_URL}/users/${username}/tasks`
       , task);
   }
 }
