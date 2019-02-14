@@ -96,8 +96,9 @@ export class ListTasksComponent implements OnInit {
   }
 
   addSubTask(masterTaskID) {
+    console.log(masterTaskID);
     sessionStorage.setItem("MASTER_TASK", masterTaskID);
-    this.addTask();
+    this.router.navigate(['tasks', -1]);
   }
 
 }

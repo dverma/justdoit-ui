@@ -32,9 +32,7 @@ export class TaskDataService {
 
   createTask(username: string, task: Task) {
     let masterTaskId = sessionStorage.getItem("MASTER_TASK");
-    if (masterTaskId !== null) {
-      sessionStorage.removeItem('MASTER_TASK');
-    }
+    sessionStorage.removeItem('MASTER_TASK');
 
     const options = {
       params: new HttpParams().set('masterId', masterTaskId)
