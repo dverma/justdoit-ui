@@ -13,5 +13,8 @@ export class AppComponent {
     if (authService.isUserLoggedIn()) {
       router.navigate(['tasks']);
     }
+    else {
+      router.navigate(['login']);
+    }
   }
 }
