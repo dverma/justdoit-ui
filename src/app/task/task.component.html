@@ -1,3 +1,41 @@
-<p>
-  task works!
-</p>
+<div class="container">
+  <H3>What's on your plate to do?</H3>
+  <br>
+
+  <div class="alert alert-warning" *ngIf="taskForm.dirty && taskForm.invalid">Enter valid values</div>
+  <div class="alert alert-warning" *ngIf="taskForm.dirty && dueDate.invalid">Enter valid Target Date</div>
+  <div class="alert alert-warning" *ngIf="taskForm.dirty && description.invalid">Enter atleast 2 characters in
+    Description</div>
+
+  <form (ngSubmit)="!taskForm.invalid && saveTask()" #taskForm="ngForm">
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" #description="ngModel" [(ngModel)]="task.description" class="form-control" name="description"
+        required="required" minlength="2">
+    </div>
+
+    <div class="form-group">
+      <label>Priority</label>
+      <select class="form-control" #priority="ngModel" [ngModel]="task.priority" (ngModelChange)="task.priority=$event"
+        name="priority">
+        <option value=1>Low</option>
+        <option value=2>Medium</option>
+        <option value=3>High</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Target Date</label>
+      <input type="date" #dueDate="ngModel" [ngModel]="task.dueDate | date:'yyyy-MM-dd' "
+        (ngModelChange)="task.dueDate = $event" class="form-control" name="dueDate" required="required">
+    </div>
+
+    <div class="form-group">
+      <label for="formControlRange">Progress</label> &nbsp;<span class="border border-info">{{task.progress}}%</span>
+      <input type="range" class="form-control-range" #progress="ngModel" [ngModel]="task.progress"
+        (ngModelChange)="task.progress=$event" name="progress">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

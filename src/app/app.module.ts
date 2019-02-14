@@ -12,6 +12,7 @@ import { TaskComponent } from './task/task.component';
 import { ListTasksComponent } from './list-tasks/list-tasks.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorJWTService } from './service/http/http-interceptor-jwt.service';
+import { MaterialModule } from './material-module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HttpInterceptorJWTService } from './service/http/http-interceptor-jwt.s
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [
     {

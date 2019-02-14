@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Task } from 'src/app/task/task.component';
 import { environment } from 'src/environments/environment';
 
@@ -31,8 +31,16 @@ export class TaskDataService {
   }
 
   createTask(username: string, task: Task) {
+    let masterTaskId = sessionStorage.getItem("MASTER_TASK");
+    if (masterTaskId !== null) {
+      sessionStorage.removeItem('MASTER_TASK');
+    }
+
+    const options = {
+      params: new HttpParams().set('masterId', masterTaskId)
+    };
     return this.http.post(
       `${environment.API_URL}/users/${username}/tasks`
-      , task);
+      , task, options);
   }
 }

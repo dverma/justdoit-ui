@@ -1,50 +1,78 @@
-<!-- <ul ng-repeat="task in tasks" class="list-group-item list-group-item-action">
-  <li class="list_style">
-    <span>{{task.description}}</span>
-    <span><button class="btn btn-danger" ng-click="remove(task._id)">Delete</button></span>
-    <span><button class="btn btn-info" ng-click="edit(task._id)">Edit</button></span>
-    <span><button class="btn btn-info" ng-click="addTask(task._id)">Add new task</button></span>
-    <span><button class="btn btn-success" ng-click="showTasks(task._id)">+</button></span>
-  </li>
-  <li>
-    <ul class="list-group-item list-group-item-action active" style="margin-top: 10px;">
-      <li ng-repeat="subTask in task.subTasks">
-        {{subTask.description}}
-        {{subTask.due_date}}
-      </li>
-    </ul>
-  </li>
-</ul> -->
-
-<h1> Task </h1>
-
-<div class="alert alert-success" *ngIf='message'>{{message}}</div>
-
 <div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Target Date</th>
-        <th>is Completed?</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let Task of tasks">
-        <td>{{Task.description}}</td>
-        <td>{{Task.dueDate | date | uppercase}}</td>
-        <td>{{Task.isCompleted}}</td>
-        <td><button (click)="updateTask(Task.id)" class="btn btn-success">Update</button></td>
-        <td><button (click)="deleteTask(Task.id)" class="btn btn-warning">Delete</button></td>
-      </tr>
-    </tbody>
-
-  </table>
-
   <div class="row">
-    <button (click)="addTask()" class="btn btn-success">Add</button>
+    <h3>Hi {{user}},</h3>
+  </div>
+
+  <div class="row" *ngIf="noMsgs==false">
+    <h4> Let's get started on these tasks: </h4>
+  </div>
+  <div class="row" *ngIf="noMsgs==true">
+    <h4> Let's get some tasks added... or is it time for a beer?</h4>
+  </div>
+
+
+  <div class="alert alert-success" *ngIf='message'>{{message}}</div>
+
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+
+      <button mat-icon-button disabled></button>
+
+      <div [ngClass]="{
+            'alert':true,
+            'alert-primary': node.priority === 1,
+            'alert-warning': node.priority === 2,
+            'alert-danger': node.priority === 3
+        }">
+        <p [ngClass]="{'text-success font-italic': node.isCompleted}">{{node.description}}</p>
+        <span>Due by: {{node.dueDate | date: 'mediumDate'}}</span>
+        <span> & is {{node.progress}}% complete.</span>
+      </div>
+
+      <!-- {{node.isCompleted}} -->
+      <button (click)="updateTask(node.id)" mat-icon-button color="warn">
+        <mat-icon>create</mat-icon>
+      </button>
+      <button (click)="deleteTask(node.id)" mat-icon-button color="warn">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+      <button (click)="addSubTask(node.id)" mat-icon-button color="warn">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-tree-node>
+
+    <!-- This is the tree node for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.description">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <div [ngClass]="{
+            'alert':true,
+            'alert-primary': node.priority === 1,
+            'alert-warning': node.priority === 2,
+            'alert-danger': node.priority === 3
+         }">
+        <p [ngClass]="{'text-success font-italic': node.isCompleted}">{{node.description}}</p>
+        <span>Due by: {{node.dueDate | date: 'mediumDate'}}</span>
+        <span> & is {{node.progress}}% complete.</span>
+      </div>
+      <button (click)="updateTask(node.id)" mat-icon-button color="warn">
+        <mat-icon>create</mat-icon>
+      </button>
+      <button (click)="deleteTask(node.id)" mat-icon-button color="warn">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+      <button (click)="addSubTask(node.id)" mat-icon-button color="warn">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-tree-node>
+  </mat-tree>
+  <br>
+  <div class="row">
+    <button (click)="addTask()" class="btn btn-primary">Add a new task</button>
   </div>
 
 </div>
